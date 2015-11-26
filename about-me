@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>About me</title>
+    <meta name="description" content="" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/screen.css?v=d82c683db7" />
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+
+    <link rel="canonical" href="http://localhost:2368/about-me/" />
+    <meta name="referrer" content="origin" />
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="" href="http://localhost:2368/rss/" />
+</head>
+<body class="post-template page-template page nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post page">
+
+        <header class="post-header">
+            <h1 class="post-title">About me</h1>
+        </header>
+
+        <section class="post-content">
+            <p><img src="content/images/2015/11/IMG_4026.jpg" alt="" /></p>
+
+<p>Felix ...</p>
+
+<ul>
+<li>... is 29 years old.</li>
+<li>... likes to ride motor-/bicycles, swim, run, cook, read, binge-watch.</li>
+<li>... is a software engineer.</li>
+<li>... lives in Munich, Germany.</li>
+<li>... likes to work on iOS and the web.</li>
+<li>... uses email: <a href="mailto:felix.hammerl@gmail.com">felix.hammerl@gmail.com</a></li>
+<li>... tweets: <a href="https://twitter.com/felixhammerl">@felixhammerl</a></li>
+<li>... uses Github: <a href="https://github.com/felixhammerl">felixhammerl</a></li>
+</ul>
+        </section>
+
+    </article>
+</main>
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://localhost:2368"></a> &copy; 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.fitvids.js?v=d82c683db7"></script>
+    <script type="text/javascript" src="assets/js/index.js?v=d82c683db7"></script>
+
+</body>
+</html>
