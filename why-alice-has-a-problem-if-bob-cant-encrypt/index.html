@@ -1,0 +1,220 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Why Alice has a problem if Bob can't encrypt</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=50b7ca9c64">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+
+    <link rel="canonical" href="http://localhost:2368/why-alice-has-a-problem-if-bob-cant-encrypt/">
+    <meta name="referrer" content="origin">
+    
+    <meta property="og:site_name" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Why Alice has a problem if Bob can't encrypt">
+    <meta property="og:description" content='I listened to many good talks at the 31st Chaos Communication Congress in Hamburg (GER) last December. I was especially impressed by "Crypto Tales from the Trenches" by Nadia Heninger, Julia Angwin, Laura Poitras, and Jack Gillum, and "Reconstructing narratives"...'>
+    <meta property="og:url" content="http://localhost:2368/why-alice-has-a-problem-if-bob-cant-encrypt/">
+    <meta property="article:published_time" content="2015-01-27T22:28:09.000Z">
+    <meta property="article:modified_time" content="2015-01-29T09:39:19.000Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Why Alice has a problem if Bob can't encrypt">
+    <meta name="twitter:description" content='I listened to many good talks at the 31st Chaos Communication Congress in Hamburg (GER) last December. I was especially impressed by "Crypto Tales from the Trenches" by Nadia Heninger, Julia Angwin, Laura Poitras, and Jack Gillum, and "Reconstructing narratives"...'>
+    <meta name="twitter:url" content="http://localhost:2368/why-alice-has-a-problem-if-bob-cant-encrypt/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "",
+    "author": {
+        "@type": "Person",
+        "name": "Felix Hammerl",
+        "image": "//www.gravatar.com/avatar/43b83b2012350d89a6e096d72a21b07d?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/felix",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "Why Alice has a problem if Bob can&#x27;t encrypt",
+    "url": "http://localhost:2368/why-alice-has-a-problem-if-bob-cant-encrypt/",
+    "datePublished": "2015-01-27T22:28:09.000Z",
+    "dateModified": "2015-01-29T09:39:19.000Z",
+    "description": "I listened to many good talks at the 31st Chaos Communication Congress in Hamburg (GER) last December. I was especially impressed by &quot;Crypto Tales from the Trenches&quot; by Nadia Heninger, Julia Angwin, Laura Poitras, and Jack Gillum, and &quot;Reconstructing narratives&quot;..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.7">
+    <link rel="alternate" type="application/rss+xml" title="" href="http://localhost:2368/rss/">
+</head>
+<body class="post-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="http://localhost:2368/">Home</a></li>
+            <li class="nav-about-me" role="presentation"><a href="http://localhost:2368/about-me">About Me</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="http://localhost:2368/rss/">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">Why Alice has a problem if Bob can't encrypt</h1>
+            <section class="post-meta">
+                By: Felix Hammerl
+            </section>
+            <section class="post-meta">
+                Published: <time datetime="26 Nov 2015">27 Jan 2015</time>, Last update: <time datetime="26 Nov 2015">27 Jan 2015</time>
+            </section>
+            <section class="post-meta">
+                Share and discuss on <a class="icon-twitter" href="https://twitter.com/intent/tweet?text=Why%20Alice%20has%20a%20problem%20if%20Bob%20can't%20encrypt&amp;via=felixhammerl&amp;url=http://localhost:2368/why-alice-has-a-problem-if-bob-cant-encrypt/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"><span class="hidden">Twitter</span></a>
+            </section>
+
+        </header>
+
+        <section class="post-content">
+            <p>I listened to many good talks at the 31st Chaos Communication Congress in Hamburg (GER) last December. I was especially impressed by <a href="https://media.ccc.de/browse/congress/2014/31c3_-_6154_-_en_-_saal_1_-_201412272300_-_crypto_tales_from_the_trenches_-_nadia_heninger_-_julia_angwin_-_laura_poitras_-_jack_gillum.html#video">"Crypto Tales from the Trenches"</a> by Nadia Heninger, Julia Angwin, Laura Poitras, and Jack Gillum, and <a href="https://media.ccc.de/browse/congress/2014/31c3_-_6258_-_en_-_saal_1_-_201412282030_-_reconstructing_narratives_-_jacob_-_laura_poitras.html#video">"Reconstructing narratives"</a> by Jacob Appelbaum and Laura Poitras. That got me thinking about the state of crypto in 2015 and the hard parts of developing a cryptosystem for the real world.</p>
+
+<p>This post sets out to explain the merits of cryptography ("The Good") and how to apply the lessons learned ("The Bad").</p>
+
+<h1 id="thegood">The Good</h1>
+
+<p>More open-source initatives are working towards an encrypted future than ever before. This is a good thing! This shows a stronger level of interest and activity anyone would have expected prior to June 2013.</p>
+
+<p>A crypto-anarchist's dream is an ideal world where everybody would communicate in encrypted form. Computers of all shapes and sizes would communicate in a way that prevents eavesdropping and allows for tamperproof message exchange, in theory giving birth to a new kind of freedom unlike anything we haveseen before. The change is happening now, at that very moment, all around the globe, right under your nose! Jon Callas' talk <a href="https://www.youtube.com/watch?v=VLTGyYU52VQ">"The Revolution Will Be Encrypted"</a> sums this up very welly. If you apply cryptography to modern communication tools, the result can be marvellous:</p>
+
+<ul>
+<li>Cryptography erases distance. You can whisper in someone's ear who is a world away, choose to associate with whom you want to associate. And nobody in between is the wiser.</li>
+<li>You can speak publicly. Everybody can make sure that the message relayed to them is unmodified.</li>
+<li>You can speak privately. You can choose to not be on the record. You can create a space where you can be stupid, or be wrong, or assume a different identity, or develop new ideas.</li>
+</ul>
+
+<p>Those three basic human rights, enabled by applied mathematics, offer enormous potential for a free and open society.</p>
+
+<p>Investigative journalism is a good example here. Besides the legislative, executive and judicial branches of the government, journalism is an extra-governmental forcing function in the system of checks and balances. Investigative journalists have the power to rectify deficiencies. Their unique ability is to get insights in otherwise completely walled-off affairs. In order to do this, the ability to speak privately to your source is a life insurance. All too often in a very literal sense.</p>
+
+<blockquote>
+  <p>But I have nothing to hide?!</p>
+</blockquote>
+
+<p>So, what if you really had nothing to hide? Really? Suffice to say that there are numerous studies out there to show how much of a misconception it is to assume that no harm will come to you because you are not interesting. Surveillance is a form of behavioral control. Because you will change your behavior if you know that you are under surveillance. Those two sources sum this up quite nicely:</p>
+
+<ul>
+<li><a href="http://tehlug.org/files/solove.pdf">"'I've got nothing to hide' and other misunderstandings of privacy" by Daniel Solove</a></li>
+<li><a href="http://www.ted.com/talks/glenn_greenwald_why_privacy_matters">"Why privacy matters" by Glenn Greenwald</a></li>
+</ul>
+
+<h1 id="thebad">The Bad</h1>
+
+<p>Mass surveillance of electronic communication is a fact. We have had our suspicions for a long time, now we know for sure. Equally worrying are the reports about active corruption of cryptographic standards in order to promote weak or backdoored implementations. Only a small number of well-designed crypto protocols and their implementations in Open Source Software hold up under scrutiny. Among them is the <strong>PGP</strong> standard for email encryption.</p>
+
+<p>So while tools for effective protection from mass surveillance exist, they are mostly very hard to use due to bad user experience (UX). Let's look at how an encrypted conversation between Alice and Bob might start:</p>
+
+<p>1) Alice has to invest time to seek out the appropriate tools. <br>
+2) Alice has to invest time and money to learn to use those new tools. <br>
+3) Alice has to invest time to convince her communication counterpart Bob to use those tools. <br>
+4) Bob has to invest time and money to learn to use those tools, too.</p>
+
+<p>And they also have to invest time to deal with the overhead of encrypted communication, e.g. being restricted to certain devices.</p>
+
+<p>Let's have a more detailed look at step 2 in the following section "Make your stuff usable for Alice" and step 4 in the section "Make your stuff usable for Bob".</p>
+
+<h2 id="makeyourstuffusableforalice">Make your stuff usable for Alice</h2>
+
+<p>Your level of protection can only be as good as the weakest link in the chain. The design of cryptosystems in itself is hard enough, especially when they are attacked by an infinitely powerful adversary. But all too often, the <a href="http://www.cs.berkeley.edu/~tygar/papers/Why_Johnny_Cant_Encrypt/USENIX.pdf">weakest</a> <a href="http://www.chariotsfire.com/pub/sheng-poster_abstract.pdf">link</a> <a href="http://www.academia.edu/3042410/Crying_Wolf_An_Empirical_Study_of_SSL_Warning_Effectiveness">is the</a> <a href="http://www.cl.cam.ac.uk/users/rja14/Papers/wcf.pdf">user</a>, even if the crypto is solid.</p>
+
+<p>In that case, the next best option is lowering the entry barrier. This is typically achieved by well-designed UI and UX. But how do you achieve a pleasant UX for crypto? The answer is painfully obvious: <em>Hide the crypto</em>.</p>
+
+<p>During the past year of working on <a href="https://mail.whiteout.io/">Whiteout Mail</a>, I have come to understand that users don't want to be bothered with encryption. Cryptographic tools are typically designed by engineers. An engineer has a pretty good impression of what the program is supposed to do. They know what's happening behind the scenes. They want to be in control. They know about fingerprints and key lengths. They know the difference between a public key and a private key. They want to choose whether to send in PGP/MIME or PGP/INLINE, to encrypt and/or sign a message. They already know what to do. Now guess what would happen if someone took all that knowledge away and told them to use the very same tool again.</p>
+
+<p><img src="http://i1.kym-cdn.com/photos/images/facebook/000/234/739/fa5.jpg" alt="I have no idea what I'm doing"></p>
+
+<p>All of a sudden, all the options are overwhelming. There's no way of knowing what it could possibly mean. If a user is unsure about what you want from them, two things will happen:</p>
+
+<ul>
+<li>They will assume that they will probably do something wrong.</li>
+<li>Out of fear of doing something wrong they will stop using your stuff altogether.</li>
+</ul>
+
+<p>If you look more closely, all of the complexity could have been substituted by safe defaults. <a href="https://www.youtube.com/watch?v=is9luGFzqgA">In his SOUPS '14 keynote</a> Christopher Soghoian explains why safe defaults are a really good idea when it comes to complexity. Why not use PGP/MIME by default? Why not generate 2k or 4k RSA keys by default? Why not hide signatures if they are valid and only show them if they are invalid? Or why not change use a nomenclature that explains what signatures actually represent, i.e. the message integrity? Most of those things reflect details of the underlying protocol. And the average user mostly does not care about that (and rightfully so).</p>
+
+<p>Show the details if something goes wrong? <em>Absolutely</em>. Show that something goes wrong and give the user the ability to dig deeper with optional error information.</p>
+
+<p>Hide the details as long as everything is ok? <em>Absolutely</em>. Leave the options to the pros, they'll know what to look for in the preferences.</p>
+
+<p>So now you've finally managed to create a usable cryptosystem, at least for the Alice you had in mind when you developed it. </p>
+
+<p>Now comes the hard part: Alice wants to put it to good use and communicate with Bob.</p>
+
+<h2 id="makeyourstuffusableforbob">Make your stuff usable for Bob</h2>
+
+<p>This one is basically about empathy. While your users, i.e. Alice, have at least an idea that they want to use crypto, their communication partners, i.e. Bob, on the other hand are considerably harder to get on board. More likely than not Bob will not even know that he is using cryptography. Bob will be far less motivated to figure out the parts where you failed to guide him. Bob will not know what to do. Please listen to <a href="https://media.ccc.de/browse/congress/2014/31c3_-_6154_-_en_-_saal_1_-_201412272300_-_crypto_tales_from_the_trenches_-_nadia_heninger_-_julia_angwin_-_laura_poitras_-_jack_gillum.html#video">what Poitras, Angwin et al. say about what happens when you make the Bobs of this world use crypto</a>.</p>
+
+<p>When you lose Bob during the onboarding process, privacy gives way to convenience. Bob thinks he might as well send in plain text, because who would be interested in him anyway? What's the worst thing that might happen? Bob has no way of knowing that as soon as somebody pulls his communication logs, he is naked and his life is ripped wide open. Would you want the contents of your email account be open to everyone? Just ask <a href="http://www.dailymail.co.uk/news/article-2382681/Colin-Powell-admits-sending-personal-emails-Romanian-diplomat-DENIES-having-affair-hacker-threatens-leak-intimate-messages.html">Colin Powell</a>, <a href="http://edition.cnn.com/2011/POLITICS/06/16/weiner.scandal/">Anthony Weiner</a>, or <a href="http://edition.cnn.com/2012/11/12/us/petraeus-cia-resignation/">David Petraeus</a>.</p>
+
+<p><strong>When you develop a cryptosystem, please have some empathy for Bob, i.e. the people on the other end of the line. Bob is the one that makes or breaks your cryptosystem!</strong></p>
+        </section>
+
+        <footer class="post-footer">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+                var disqus_shortname = 'felixhammerl';
+                var disqus_identifier = '';
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </footer>
+
+    </article>
+</main>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://localhost:2368"></a> © 2015</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=50b7ca9c64"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=50b7ca9c64"></script>
+
+</body>
