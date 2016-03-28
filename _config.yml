@@ -1,0 +1,7 @@
+baseurl: ""
+url: "http://felixhammerl.com"
+title: "Felix Hammerl"
+desc: "Confessions of a software developer."
+
+# Build settings
+markdown: kramdown

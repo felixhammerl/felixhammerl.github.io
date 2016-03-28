@@ -1,0 +1,202 @@
+.home {
+  min-height: 100vh;
+  background: white;
+
+  @media #{$media-md} {
+    background: linear-gradient(to right, black 0%, black 50%, white 50%, white 100%);
+  }
+
+  @mixin on-circle($item-count, $circle-size, $item-size) {
+    position: relative;
+    width: $circle-size;
+    height: $circle-size;
+    padding: 0;
+    border-radius: 50%;
+    list-style: none;
+
+    > * {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: $item-size;
+      height: $item-size;
+      margin: -($item-size / 2);
+
+      $angle: 120 / $item-count;
+      $rot: 45;
+
+      @for $i from 1 through $item-count {
+        &:nth-of-type(#{$i}) {
+          transform: rotate($rot * 1deg) translate($circle-size / 2) rotate($rot * -1deg);
+        }
+
+        $rot: $rot + $angle;
+      }
+    }
+  }
+
+  &__about {
+    padding: 50px 0 0 0;
+    color: white;
+    margin: 0 auto;
+    width: 100%;
+
+    &-photo {
+      @include on-circle($item-count: 4, $circle-size: 280px, $item-size: 40px);
+
+      position: relative;
+      margin: 0 auto 20px auto;
+      width: 200px;
+      height: 200px;
+      background-image: url("/assets/images/avatar.jpg");
+      background-size: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px #888888;
+      position: relative;
+
+      &--shake {
+        animation: shake 10s ease-in-out infinite;
+      }
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 0 10px 3px red;
+      }
+    }
+
+    &-info {
+      display: none;
+      height: 40px;
+      width: 40px;
+      background: #888888;
+      box-shadow: 0 0 10px 3px #888888;
+      border-radius: 50%;
+      color: white;
+
+      &:hover {
+        color: red;
+        box-shadow: 0 0 10px 3px red;
+      }
+
+      & > a svg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 50%;
+        width: 50%;
+        fill: currentcolor;
+      }
+
+      &--show {
+        display: block;
+      }
+    }
+
+    @keyframes shake {
+      0% {
+        transform: translateX(0) scale(1);
+      }
+
+      20% {
+        transform: translateX(0) scale(1);
+      }
+
+      20.5% {
+        transform: translateX(+3px) scale(1.02);
+      }
+
+      21% {
+        transform: translateX(0) scale(1);
+      }
+
+      21.5% {
+        transform: translateX(-3px) scale(0.98);
+      }
+
+      22% {
+        transform: translateX(0) scale(1);
+      }
+
+      22.5% {
+        transform: translateX(+3px) scale(1.02);
+      }
+
+      23% {
+        transform: translateX(0) scale(1);
+      }
+
+      23.5% {
+        transform: translateX(-3px) scale(0.98);
+      }
+
+      24% {
+        transform: translateX(0) scale(1);
+      }
+    }
+  }
+
+  &__list {
+    word-wrap: break-word;
+
+    hr {
+      border: 0;
+      height: 1px;
+      margin-top: 30px;
+      background-image: linear-gradient(to right, rgba(black, 0), rgba(black, 1), rgba(black, 0));
+
+      @media #{$media-md} {
+        background-image: linear-gradient(to right, rgba(white, 0) 0%, rgba(white, 1), white 50%, black 50%, rgba(black, 1), rgba(black, 0) 100%);
+      }
+    }
+
+    &-entry {
+      align-content: flex-start;
+      align-items: center;
+      width: 100%;
+      padding-top: 3em;
+
+      @media #{$media-md} {
+        display: flex;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      &-left {
+        padding: 1em;
+        color: black;
+        flex-basis: 50%;
+
+        @media #{$media-md} {
+          text-align: right;
+          color: white;
+        }
+
+        &-header {
+          font-family: $font-family-header;
+          font-style: italic;
+          font-weight: bold;
+          font-size: 2em;
+          line-height: 2;
+          vertical-align: top;
+        }
+      }
+
+      &-right {
+        padding: 1em;
+        flex-basis: 50%;
+
+        &-link {
+          padding-top: 1em;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body>
+    <div class="wrapper">
+      <article class='post'>
+        <h1 class="post__header">{{ page.title | title }}</h1>
+      
+        <div class="post__meta">
+          <span class="post__meta-date">{{ page.date | date: "%-d %B %Y"}}</span>
+          {% for author in page.authors %}
+          <span><a href="{{ author.link }}">{{author.name}}</a></span>
+          {% endfor %}
+        </div>
+      
+        <article class="post__content">{{ content }}</article>
+      
+        <div class="post__footer"><a href="/">&lt;&lt;&nbsp;Back to all</a></div>
+      </article>
+    </div>
+  </body>
+
+</html>
+
