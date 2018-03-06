@@ -1,36 +1,27 @@
 @font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 400;
-  src: url(/assets/fonts/PlayfairDisplay-Regular.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: italic;
-  font-weight: 400;
-  src: url(/assets/fonts/PlayfairDisplay-Italic.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
-  font-weight: 700;
-  src: url(/assets/fonts/PlayfairDisplay-Bold.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: italic;
-  font-weight: 700;
-  src: url(/assets/fonts/PlayfairDisplay-BoldItalic.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  font-style: normal;
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans-ExtraBold-webfont.woff') format('woff');
   font-weight: 900;
-  src: url(/assets/fonts/PlayfairDisplay-Black.woff) format('woff');
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans-ExtraBoldItalic-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans-Light-webfont.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/OpenSans-LightItalic-webfont.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
 }
 
 @font-face {
@@ -38,13 +29,6 @@
   font-style: italic;
   font-weight: 900;
   src: url(/assets/fonts/PlayfairDisplay-BlackItalic.woff) format('woff');
-}
-
-@font-face {
-  font-family: 'Cutive Mono';
-  font-style: normal;
-  font-weight: 400;
-  src: url(/assets/fonts/CutiveMono-Regular.woff) format('woff');
 }
 
 @font-face{
@@ -94,46 +78,3 @@
   font-stretch: normal;
   src: url(/'assets/fonts/SourceCodePro-BlackIt.ttf.woff') format('woff');
 }
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/assets/fonts/OpenSans-ExtraBold-webfont.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/assets/fonts/OpenSans-Light-webfont.woff') format('woff');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/assets/fonts/OpenSans-Regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/assets/fonts/OpenSans-Italic-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/assets/fonts/OpenSans-ExtraBoldItalic-webfont.woff') format('woff');
-  font-weight: bold;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  src: url('/assets/fonts/OpenSans-LightItalic-webfont.woff') format('woff');
-  font-weight: 100;
-  font-style: italic;
-}
-
