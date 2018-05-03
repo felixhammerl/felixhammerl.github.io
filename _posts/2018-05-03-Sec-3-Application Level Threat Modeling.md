@@ -71,6 +71,12 @@ When confronted with a vulnerability, a common knee-jerk reaction for an enginee
 - [Threat model for DOMPurify by Cure53](https://github.com/cure53/DOMPurify/wiki/Security-Goals-&-Threat-Model)
 - [Threat model for End-To-End by Google](https://github.com/google/end-to-end/wiki/Threat-model)
 
+The next knee-jerk reaction is to always go for the risk, which proves to be hard sometimes. Please note that it is **equally valid to mitigate risk as it is to mitigate the outcome**. For example, the devops movement has brought an end to many of the most dearly-held assumptions of sysadmins optimizing for uptime. Instead, the devops movement advocates for treating servers like cattle, not pets. If one goes down, it gets replaced rather than repaired (Bias, 2016):
+
+> Arrays of more than two servers, that are built using automated tools, and are designed for failure, where no one, two, or even three servers are irreplaceable.
+
+Another analogy can be made for XSS and the way React handled it. The DOM is still as vulnerable as it always was, but since React ditched the DOM for parsing and instead build a DOM itself, it can work around the DOM's weaknesses. The risk is still there, but the impact is 99% mitigated as long as you stay within React's realm.
+
 ## Bringing security into your organization
 
 Now that we've taken a look at how we can tie our security efforts back to the security goals, the next step is to get the organization to sign off on our efforts. However, there are some caveats. We need to communicate the following points:
@@ -112,6 +118,8 @@ A common theme in modern software development is that cost can be driven down by
 ![Your threat model is not my threat model by @thegrugq](/assets/images/your-threat-model-is-not-my-threat-model.png)
 
 # References
+
+Bias, [*The History of Pets vs Cattle and How to Use the Analogy Properly*](http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/)
 
 Caroli, [*Lean Inception*](https://martinfowler.com/articles/lean-inception/), 2017
 
