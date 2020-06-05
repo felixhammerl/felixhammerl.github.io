@@ -9,7 +9,7 @@ excerpt: In this post, we explore what it takes to create a secure software deli
 
 *Also appeared on [ThoughtWorks Insights](https://www.thoughtworks.com/insights/articles/towards-a-secure-path-to-production)*
 
-asdasddAsk anyone in tech and they’ll tell: security is a paramount concern. And yet, while organizations draw up endless lists of security requirements, most find applications and frameworks are still riddled with vulnerabilities; they use frameworks that are no longer maintained; or components aren’t updated. And feature pressure almost always trumps the laborious process of security. But it needn’t be that way. Here, I’ll explore how to convince your enterprise to build security into software engineering and make security the first-class citizen it deserves to be.
+Ask anyone in tech and they’ll tell: security is a paramount concern. And yet, while organizations draw up endless lists of security requirements, most find applications and frameworks are still riddled with vulnerabilities; they use frameworks that are no longer maintained; or components aren’t updated. And feature pressure almost always trumps the laborious process of security. But it needn’t be that way. Here, I’ll explore how to convince your enterprise to build security into software engineering and make security the first-class citizen it deserves to be.
 
 
 # News comes first, then comes the shock
