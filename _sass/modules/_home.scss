@@ -23,8 +23,8 @@
       height: $item-size;
       margin: -($item-size / 2);
 
-      $angle: 120 / $item-count;
-      $rot: 45;
+      $angle: 90 / $item-count;
+      $rot: -30;
 
       @for $i from 1 through $item-count {
         &:nth-of-type(#{$i}) {
@@ -43,7 +43,7 @@
     width: 100%;
 
     &-photo {
-      @include on-circle($item-count: 4, $circle-size: 280px, $item-size: 40px);
+      @include on-circle($item-count: 3, $circle-size: 280px, $item-size: 40px);
 
       position: relative;
       margin: 0 auto 20px auto;
@@ -55,10 +55,6 @@
       box-shadow: 0 0 10px 3px #888888;
       position: relative;
 
-      &--shake {
-        animation: shake 10s ease-in-out infinite;
-      }
-
       &:hover {
         cursor: pointer;
         box-shadow: 0 0 10px 3px red;
@@ -66,7 +62,7 @@
     }
 
     &-info {
-      display: none;
+      display: block;
       height: 40px;
       width: 40px;
       background: #888888;
@@ -87,52 +83,6 @@
         height: 50%;
         width: 50%;
         fill: currentcolor;
-      }
-
-      &--show {
-        display: block;
-      }
-    }
-
-    @keyframes shake {
-      0% {
-        transform: translateX(0) scale(1);
-      }
-
-      20% {
-        transform: translateX(0) scale(1);
-      }
-
-      20.5% {
-        transform: translateX(+3px) scale(1.02);
-      }
-
-      21% {
-        transform: translateX(0) scale(1);
-      }
-
-      21.5% {
-        transform: translateX(-3px) scale(0.98);
-      }
-
-      22% {
-        transform: translateX(0) scale(1);
-      }
-
-      22.5% {
-        transform: translateX(+3px) scale(1.02);
-      }
-
-      23% {
-        transform: translateX(0) scale(1);
-      }
-
-      23.5% {
-        transform: translateX(-3px) scale(0.98);
-      }
-
-      24% {
-        transform: translateX(0) scale(1);
       }
     }
   }
