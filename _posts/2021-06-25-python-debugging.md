@@ -40,7 +40,13 @@ I personally also use `vim-plug` to manage my other vim tools and integrations l
 
 Not that we are able to author code, we'll have to take a look at debugging. Therefore, let me introduce you to `pudb` ([documentation](https://documen.tician.de/pudb/)). It's an ncurses-esque Python debugger that has all the amenities of a modern CLI. Since we're already writing the code in the terminal and executing the tests from there, why not also debug from here?
 
-Setting a breakpoint in code in Python 3.7+ works by adding the line `breakpoint()`. `breakpoint` is syntactic sugar that translates to `import pdb; pdb.set_trace()`, which activates the Python debugger. The thing is, we don't want to open `pudb`, not`pdb`, which requires changing the implementation of `breakpoint()`. Luckily, we can easily tell Python what we want `breakpoint()` to actually mean with the environment variable `PYTHONBREAKPOINT`, like so:
+Setting a breakpoint in code in Python 3.7+ works by adding the line:
+
+```
+breakpoint()
+```
+
+`breakpoint` is syntactic sugar that translates to `import pdb; pdb.set_trace()`, which activates the Python debugger. The thing is, we don't want to open `pudb`, not`pdb`, which requires changing the implementation of `breakpoint()`. Luckily, we can easily tell Python what we want `breakpoint()` to actually mean with the environment variable `PYTHONBREAKPOINT`, like so:
 
 ```
 PYTHONBREAKPOINT=pudb.set_trace python code.py
@@ -51,7 +57,7 @@ Even better than this, put `export PYTHONBREAKPOINT="pudb.set_trace"` into your 
 Last, but not least, we'd like to integrate the whole thing with `pytest`, so we can debug our tests neatly, which for the most part means getting `pytest` to silence its CLI output and stay on the sidelines. `pudb` integrates into `pytest` with a little helper called `pytest-pudb`, which installs into your virtualenv, so when you run your tests, just add the flag `--pudb` and you're good to go. In the next example, I'll run a test marked as `only` in `pytest` and I want to open `pudb` when the execution hits `breakpoint()`:
 
 ```
-PYTHONBREAKPOINT=pudb.set_trace STAGE=dev pytest test -m only -s --pudb
+PYTHONBREAKPOINT=pudb.set_trace pytest test -m only -s --pudb
 ```
 
 So, just install `pudb` and `pytest-pudb` into your project's virtualenv and have fun debugging!
