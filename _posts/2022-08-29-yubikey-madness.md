@@ -947,9 +947,7 @@ Now that everything is done, let's kill the master key and behave as if we were 
 > gpg-connect-agent "scd serialno" "learn --force" /bye
 ```
 
-After you're done, let's nuke the keychain and behave as if we were on a new machine: Import the public key only `gpg --import master.pub` and reinitialize GPG's smartcard utility: `gpg-connect-agent "scd serialno" "learn --force" /bye`.
-
-Caveats: Of all the many funtions of your yubikey, you can only ever use one at the same time. The GPG agent has the unfortunate tendency to not "release" the Yubikey after use for other applications to use. Which means that you might need to kill the GPG agent via `gpgconf --kill gpg-agent`, if you see GPG being a bit possessive, e.g. when you can't read the OTP secrets as your Yubico Authenticator says "Failed to connect to Yubikey". It's annoying, but thanks to the popularity of PGP in modern email exchange, this problem should not arise all too often.
+We've re-import the public key from the public source, so now let's reinitialize GPG's smartcard utility: `gpg-connect-agent "scd serialno" "learn --force" /bye`.
 
 Now, I promised we'd be able to use PGP in Gmail. For this, we'll use Mailvelope, which works amazingly well in Firefox or Chrome. Please go ahead and install the Mailvelope extension for [Firefox](https://addons.mozilla.org/en-US/firefox/addon/mailvelope/) or [Chrome](https://chrome.google.com/webstore/detail/mailvelope/kajibbejlbohfaggdiogboambcijhkke). We already have `gpgme` installed. Please note that you **must have commented out** `throw-keyids` in your `gpg.conf`, otherwise this will not work.
 
@@ -1014,7 +1012,7 @@ Should you want to rotate your subkeys, please refer to [DrDuh's fantastic docum
 
 Notes on GPG and Yubikeys:
 
-As I mentioned above, sometimes you might need to tell GPG to relinquish control of the Yubikey in no uncertain terms. This is best done via `gpgconf --kill gpg-agent`. In fact, I've added this bit to my `.zshrc` to make things a tad bit simpler when I change keys:
+Caveats: Of all the many funtions of your Yubikey, you can only ever use one at a time. The GPG agent has the unfortunate tendency to not "release" the Yubikey after use for other applications to use. Which means that you might need to kill the GPG agent via `gpgconf --kill gpg-agent`, if you see GPG being a bit possessive, e.g. when you can't read the OTP secrets as your Yubico Authenticator says "Failed to connect to Yubikey". It's annoying, but thanks to the popularity of PGP in modern email exchange, this problem should not arise all too often. In fact, I've added this bit to my `.zshrc` to make things a tad bit simpler when I change keys:
 
 ```
 export GNUPGHOME=~/.gnupg
