@@ -7,7 +7,7 @@ authors:
 excerpt: How to take full advantage of your yubikey... all the way down the rabbit hole.
 ---
 
-So this one is for the folks who bought a Yubikey based on slightly overenthusiastic recommendations of friends or colleagues. And most likely you've taken the key out of the enclosure and wondered: What am I supposed to do with this now?!
+So this one is for the folks who bought a Yubikey based on slightly overenthusiastic recommendations of friends or colleagues. And most likely you've taken the key out of the packaging and wondered: What am I supposed to do with this now?!
 
 Assumptions for beginners:
 
