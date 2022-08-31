@@ -1018,8 +1018,10 @@ Please note that the files *must* be named `gpgmejson.json`, in accordance with 
 
 You also need to add /opt/homebrew/bin to launchd.
 
+```
 > sudo launchctl config system path /opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 > sudo launchctl config user path /opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+```
 
 Please restart the macOS for the changes to `launchd` to take effect.
 
