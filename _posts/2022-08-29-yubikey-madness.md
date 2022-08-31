@@ -65,6 +65,15 @@ Yubikeys support OTPs through the [Yubico Authenticator](https://www.yubico.com/
 
 In order to avoid shooting yourself in the foot, *always keep the same seeds on both Yubikeys*. If you change a seed on one, change it on both. If you add a seed on one, add it on the other as well. Also note that the seed, once stored, *can not be retrieved from the Yubikey*. There is no physical way to read the seed from the Yubikey. You can *read the resulting OTP*, and you can *overwrite or delete the seed*, but you *can't extract* the original seed from the Yubikey. The way you can avoid having your Yubikeys go out of sync is to *always* enroll both Yubikeys before continuing the authenticator enrollment flow. These enrollment flows make sure that you've stored the seed correctly by prompting you to enter the current OTP. Get both Yubikeys, set them both up, make sure they display the same OTP, then enter the OTP to complete the enrollment. Should you not have the other key at hand, write down or store the seed until you're able to set the other Yubikey up and then discard the note safely.
 
+For those techically inclined, there is a CLI version of the Yubikey Manager, `ykman`. It is installable via homebrew. It allows you, amongst a whole lot of other things, to read the OTPs, e.g. an Amazon login: 
+
+```
+> brew install ykman
+> ykman oath accounts code Amazon -s
+```
+
+This is quite practical when signing into services from the CLI.
+
 # Log into websites without passwords using *only* your Yubikey
 
 Some websites allow a *passwordless* login using only your Yubikey. Instead of a password, public-key cryptography is employed to assert your identity. Don't worry, it's quite straight forward: Plug in the key, tap it, and you're signed in.
