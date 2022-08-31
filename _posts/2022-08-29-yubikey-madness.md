@@ -40,10 +40,10 @@ In a world without security tokens, you're relying on your password alone to kee
 
 Some of you will wonder why it is called second-factor or multi-factor authentication. This is because in information security, we use different *factors* to *authenticate* your identity, i.e. to check if you are who you claim to be. These factors are:
 
-* Something you know, i.e. a password, passphrase, PIN, or security question that exists only in your head because you have memorized it.
-* Something you have, i.e. a single-use token you received by SMS, a keycard, an RSA token, or a smartcard that you physically possess.
-* Something you are, i.e. your fingerprint, retina scan, facial features, veins in your palm, your pulse patterns, or other biometric properties.
-* Something you do, i.e. how you type, breathe, walk, look, as well as where you are, when you are where you are, or other patterns you exhibit.
+* Something you know: A password, passphrase, PIN, or security question that exists only in your head because you have memorized it.
+* Something you have: A single-use token you received by SMS, a keycard, an RSA token, or a smartcard that you physically possess.
+* Something you are: Your fingerprint, retina scan, facial features, veins in your palm, your pulse patterns, or other biometric properties.
+* Something you do: How you type, breathe, walk, look, as well as where you are, when you are where you are, or other patterns you exhibit.
 
 Any combination of these factors is called *multi-factor authentication* (MFA). MFA helps keep your online identity safe from attackers, because it is hard to attack all of these factors simultaneously and even if one fails, the other factors can compensate. A strong, unique, memorable password is always a good basis, so is using a password manager to avoid having to remember them all. But a second factor provides you with the peace of mind that unless someone has hacked your password **and** is in possession of your Yubikey, they can't sign in. Quite hard to steal a Yubikey when it is in your hand.
 
@@ -144,6 +144,36 @@ If you move to a different computer, you need to regenerate the private key stub
 > ssh-add -K
 > ssh-keygen -K
 > mv id_ecdsa_sk_rk ~/.ssh/id_ecdsa_sk
+```
+
+Now, there is *one* extra step you will need to do here. The problem is that by default, SSH will only select the keys with the default naming scheme, e.g. `id_ecdsa_sk`. But you can only have *one* of those and you can't have the *same* key on three Yubikeys, as the key is generated on the Yubikey and never leaves it.
+
+So, for your backup Yubikey, here's what you do:
+
+```
+> ssh-keygen -t ecdsa-sk -O resident -f id_ecdsa_sk_backup
+```
+
+This will generate a second key stub for your backup Yubikey. Repeat for other keys you might have. Since SSH won't discover this by default, you'll have to put this into your SSH configuration:
+
+```
+~/.ssh/config
+
+Host *
+    IdentitiesOnly Yes #Optional
+    IdentityFile ~/.ssh/id_ecdsa_sk
+    IdentityFile ~/.ssh/id_ecdsa_sk_backup
+```
+
+This way, SSH knows which identities it should try. Here is an example with only the backup Yubikey connected:
+
+```
+> ssh -T git@github.com
+Confirm user presence for key ECDSA-SK SHA256:CfVjTqE4nnPnycjFDcymwtK87949jkC1sy29XVLlYDA
+sign_and_send_pubkey: signing failed for ECDSA-SK "/Users/fhammerl/.ssh/id_ecdsa_sk": device not found
+Confirm user presence for key ECDSA-SK SHA256:lpNnp6lh+Pf3Y1D0otvvUyDKrefUbQOd89JyhHR+Mos
+User presence confirmed
+Hi felixhammerl! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
 Again, please note that your Yubikey has *three different PINs*, for PIV, FIDO2, and PGP, respectively. More on PGP in the next section.
