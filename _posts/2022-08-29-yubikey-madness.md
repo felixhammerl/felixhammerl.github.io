@@ -190,9 +190,10 @@ The Yubikey 5 can hold a 4096 bit RSA key in its PGP applet. Interaction with th
 * Let's set the `GNUPGHOME` environment variable in your shell (also add it to your shell's configuration, e.g. `.zshrc`): `export GNUPGHOME=~/.gnupg`
 * Restart your terminal
 * Pull a hardened GPG configuration: `wget -O $GNUPGHOME/gpg.conf https://raw.githubusercontent.com/drduh/config/master/gpg.conf`
-* In `$GNUPGHOME/gpg.conf`, please add a `# ` to `throw-keyids` to comment out the line: `# throw-keyids`
+* In `$GNUPGHOME/gpg.conf`, please *add* a `# ` to `throw-keyids` to comment out the line: `# throw-keyids`
 * Pull a hardened GPG agent configuration: `wget -O $GNUPGHOME/gpg-agent.conf https://raw.githubusercontent.com/drduh/config/master/gpg-agent.conf`
-* In `$GNUPGHOME/gpg-agent.conf`, please remove the `# ` before `pinentry-program /opt/homebrew/bin/pinentry-mac`
+* In `$GNUPGHOME/gpg-agent.conf`, please *remove* the `# ` before `pinentry-program /opt/homebrew/bin/pinentry-mac`
+* Also in `$GNUPGHOME/gpg-agent.conf`, please *add* a `# ` before `pinentry-program /usr/bin/pinentry-curses`
 
 Now that we've prepped our environment, let's start by creating the PGP keys. Essentially, we want a "master" key that only serves to provide continuity to your identity, while so-called subkeys do the actual work. The only thing the master key ever does is certify that the subkeys were actually issued by you. Subkeys are rotated frequently, to provide some amount of [forward secrecy](https://en.wikipedia.org/wiki/Forward_secrecy), which is not baked into the PGP protocol. The subkeys are transferred to the Yubikey, the master key is *not*. PGP smartcards have 3 slots: One each for a signature key, an encryption key and an authentication key. This is what we'll use here.
 
