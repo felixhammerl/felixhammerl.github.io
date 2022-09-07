@@ -90,6 +90,8 @@ This is done through the PIV applet on your Yubikey. To access it, please downlo
 
 Please note that your Yubikey has *three different PINs*, for PIV, FIDO2, and PGP, respectively. More on FIDO2 and PGP later.
 
+One of the struggles with Intel-based Macs was the inability to boot from a FileVault-encrypted disk with a smartcard. That means that on Intel-based Macs, you could use smartcards only once FileVault was unlocked with your root password. Apple Silicon allows to unlock FileVault with *the last smartcard you enrolled or logged in with*, whichever happens later! The problem here is unlocking the Keychain, which is still password based. Whenever you log in with a different smartcard (even if it was enrolled before!), you will be prompted for your root password. Only the smartcard for which you unlocked the Keychain last will be able to unlock FileVault during boot! Otherwise, you will be greeted with an error telling you that your smartcard setup is faulty.
+
 If you're frequently working in the console, there is another really cool feature: You can use your Yubikey's PIV applet for `sudo`. To do that, edit `/etc/pam.d/sudo` to look like this:
 
 ```
@@ -122,7 +124,7 @@ If you're new to using the Yubikey, it is highly likely that you've touched it a
 
 With that being done, we can choose four different things behaviors, but for me there is one favorite in terms of practicality: Static password. Let me explain why it is practical. I mostly use my Mac with the lid closed, which means TouchID is unavailable. I also use 1Password, which heavily leverages TouchID. I also have a looooong vault passphrase for 1Password. If I had to fully type that every time I open 1Password, I'd be quite thoroughly annoyed. Hence, my Yubikey contains a part of the passphrase to help me keep my sanity. Just don't put the *entire* passphrase into the static password slot. I typically leave short touch unassigned.
 
-Please note: If you're thinking about using this function to enter the password of your Mac, you will be tricked. For some reason, macOS will not allow you to enter the password in this way in the pre-boot prompt when unlocking your FileVault. It will enter it, correctly even, but macOS won't accept it. It works on the post-boot login prompt, but not on the pre-boot prompt. No one knows why that is.
+Please note: If you're thinking about using this function to enter the password of your Mac, you will be tricked. For some reason, macOS will not allow you to enter the password in this way in the pre-boot prompt when unlocking your FileVault. It will enter it, correctly even, but macOS won't accept it. It works on the post-boot login prompt, but not on the pre-boot prompt. No one knows why that is. Better to use PIV when you look for easier ways to log into your Mac.
 
 # Connect to remote servers with SSH keys stored in your Yubikey
 
