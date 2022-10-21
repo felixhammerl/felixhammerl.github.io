@@ -78,9 +78,11 @@ This is quite practical when signing into services from the CLI.
 
 Some websites allow a *passwordless* login using only your Yubikey. Instead of a password, public-key cryptography is employed to assert your identity. Don't worry, it's quite straight forward: Plug in the key, tap it, and you're signed in.
 
-This is made possible by the FIDO2 standard and the WebAuthn API in your browser. What happens is that a certificate will be generated *on your Yubikey* whose *public* portion is provided to the service you're signing up for, while the secret portion remains exclusively on your Yubikey. Upon signin, the service will ask your Yubikey for a cryptographic signature, which can only be *created* by the *secret portion* of the certificate, and can be *validated* using the *public portion* of the certificate, which has been shared to the service during enrollment.
+This is made possible by the FIDO2 standard and the WebAuthn API in your browser. What happens is that a certificate will be generated *on your Yubikey* whose *public* portion is provided to the service you're signing up for, while the secret portion remains exclusively on your Yubikey. Upon signin, the service will ask your Yubikey for a cryptographic signature, which can only be *created* by the *secret portion* of the certificate, and can be *validated* using the *public portion* of the certificate, which has been shared to the service during enrollment. These credentials are called *discoverable credentials*, but sometimes you'll see the outdated *resident key* being used instead.
 
 At this point, not many websites support it. But it's quite practical on those websites that do. Just remember, as always: No signing in without the Yubikey.
+
+Your Yubikey can store up to 25 discoverable credentials. Unfortunately, the Yubikey Manager can not be used to inspect the discoverable credentials or remove selected ones, only to purge *all* of them. Instead, you can use *Chrome* or Chromium to inspect the discoverable credentials, or delete some. Please open [the security key settings in Chrome](chrome://settings/securityKeys) and click "Sign-in data". You may have to enter your FIDO2 password.
 
 # Log into macOS with your Yubikey
 
@@ -188,6 +190,8 @@ Hi felixhammerl! You've successfully authenticated, but GitHub does not provide 
 ```
 
 Again, please note that your Yubikey has *three different PINs*, for PIV, FIDO2, and PGP, respectively. More on PGP in the next section.
+
+But wait, how do I get rid of resident keys stored on my Yubikey? As mentioned above in the passwordless login section, your Yubikey can store up to 25 discoverable credentials and you can use *Chrome's* [security key settings page](chrome://settings/securityKeys) where you'll click "Sign-in data" to find the SSH keys, or delete some.
 
 # En-/Decrypt mail in Gmail with PGP keys stored in your Yubikey
 
