@@ -11,7 +11,12 @@ There is now a means of connecting to EC2 instances in private subnets without r
 
 What you're looking for is called EC2 Instance Connect Endpoint. Only ports `22` and `3389` are supported, but of course you can use additional ssh tunnels for port forwarding. You chuck one of these into your private subnet and tunnel through it.
 
-Unfortunately, EC2 Instance Connect Endpoint doesn't support connections to an instance using IPv6 addresses, but given the upside of not having to mess with a bastion host, this should be fine.
+Unfortunately, EC2 Instance Connect Endpoint doesn't support connections to an instance using IPv6 addresses, but that should not practically impact us too much.
+
+```
+ssh -i my-key-pair.pem ec2-user@i-0123456789example \
+    -o ProxyCommand='aws ec2-instance-connect open-tunnel --instance-id i-0123456789example'
+```
 
 [Connect using EC2 Instance Connect Endpoint to a Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-using-eice.html)
 
