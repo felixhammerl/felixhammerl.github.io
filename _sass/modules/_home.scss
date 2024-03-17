@@ -23,7 +23,7 @@
       height: $item-size;
       margin: -($item-size / 2);
 
-      $angle: 90 / $item-count;
+      $angle: 120 / $item-count;
       $rot: -30;
 
       @for $i from 1 through $item-count {
@@ -43,7 +43,7 @@
     width: 100%;
 
     &-photo {
-      @include on-circle($item-count: 4, $circle-size: 280px, $item-size: 40px);
+      @include on-circle($item-count: 5, $circle-size: 280px, $item-size: 40px);
 
       position: relative;
       margin: 0 auto 20px auto;
