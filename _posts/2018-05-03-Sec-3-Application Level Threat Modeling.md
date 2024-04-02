@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rational Application-level Threat Modeling
+title: Rational Application-Level Threat Modeling
 authors:
   - name: Felix Hammerl
     link: https://twitter.com/felixhammerl

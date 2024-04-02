@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Stop using bastion hosts on AWS!
+title: Stop Using Bastion Hosts on AWS!
 authors:
   - name: Felix Hammerl
     link: https://twitter.com/felixhammerl

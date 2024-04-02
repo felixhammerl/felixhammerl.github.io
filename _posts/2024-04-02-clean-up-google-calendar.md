@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rule-based auto-decline for your Google Calendar
+title: Rule-Based Auto-Decline for Your Google Calendar
 authors:
   - name: Felix Hammerl
     link: https://twitter.com/felixhammerl

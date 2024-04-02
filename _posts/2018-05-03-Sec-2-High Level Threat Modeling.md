@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rational High-level Threat Modeling
+title: Rational High-Level Threat Modeling
 authors:
   - name: Felix Hammerl
     link: https://twitter.com/felixhammerl

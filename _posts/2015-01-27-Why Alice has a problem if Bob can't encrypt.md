@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why Alice has a problem if Bob can't encrypt
+title: Why Alice Has a Problem if Bob Can’t Encrypt
 authors:
   - name: Felix Hammerl
     link: https://twitter.com/felixhammerl
