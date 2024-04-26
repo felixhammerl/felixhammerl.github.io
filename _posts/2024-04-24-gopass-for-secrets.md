@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Using gopass for Secrets Management, Infrastructure Automation and Continuous Deployment
+title: Using gopass for Secrets Management, Infrastructure Automation, and Continuous Deployment
 authors:
   - name: Felix Hammerl
     link: https://twitter.com/felixhammerl
-excerpt: Handling secrets plagues many teams. Most fail to avoid plain-text repos and have to rely on Talisman and other faulty tools. Here is a better way...
+excerpt: Handling secrets plagues many teams. Most fail to avoid plain-text repos and have to rely on Talisman and other faulty tools. gopass offers a better way.
 ---
 
 Today we'll take a look at gopass (see: [Github](https://github.com/gopasspw/gopass)), a GnuPG-based secrets manager that makes handling secrets suck a little less.
