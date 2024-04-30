@@ -307,6 +307,8 @@ resource "aws_ssm_parameter" "asd" {
 
 That's it, no additional overhead necessary! Now configure your AWS credentials and run `terraform plan` to see what the script generates. You can also parameterize the gopass secrets path as you see fit.
 
+Please note that **this is not foolproof** and that there is a **big gotcha** to this. Any value that gets ingested through `external` provider will become part of the Terraform state. [Sensitive Data in Terraform state makes the state as sensitive as the secret itself](https://developer.hashicorp.com/terraform/language/state/sensitive-data). Local state is stored in plain-text JSON files, hence you need to be careful how this state is handled, especially in a git repository. Remote state, however, may be encrypted at rest. Please make sure that your backend is configured to this end. The documentation suggests to use the S3 backend, which supports encryption at rest through the `aws_s3_bucket_server_side_encryption_configuration` resource together with appropriate IAM policies and logging to block encryption key access or identify any invalid access. It is wise to not use the default S3 KMS key for this bucket.
+
 # Continuous Deployment via Github Actions
 
 To wrap this up, let's have a look at how we would use this in a CD pipeline. We'll use Github Actions for this purpose. First, we need to create a dedicated PGP key for Github that needs to be added as a secret to Github Actions. Then, we need to install GnuPG and gopass in the workflow. Lastly, we need to configure gopass and add the secrets store.
