@@ -7,8 +7,6 @@ authors:
 excerpt: Updating dependencies is a chore at best and a source of vulnerabilities at worst. Let's look at a better way with Github Actions and Dependabot, and examine the pros and cons.
 ---
 
-# Hauptversionsnummernerhöhungsangst
-
 In the world of modern software engineering, and thanks to transitive dependencies, even small services easily have hundreds of dependencies, seemingly downloading half of Github. That's a lot of moving parts the need to be kept up to date!
 
 At best, you'd see an engineer sit down once a quarter and do the dreadful work of keeping the lockfile up to date, while mentally preparing for the flurry of breaking changes. Let's not sugarcoat it, this task just sucked. You had a day or two of fun with compatibility issues, breaking changes, regression bugs, testing overhead, and version conflicts – just to name a few.
