@@ -43,3 +43,14 @@ aws ec2-instance-connect open-tunnel \
 [Connect using EC2 Instance Connect Endpoint to a Windows instance](https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/connect-using-eice.html#eic-connect-using-rdp)
 
 If you plan on maintaining a fleet of EC2 machines, and keeping them patched, you should probably look at AWS SSM Fleet Manager, though. 
+
+# Why is this relevant for security?
+
+The first obvious benefit is that bastion hosts may be hardened, but they are still assets that need to be maintained and cost money. A bastion host needs to be isolated, but still have routes to all the important backend machines and databases that you would like to access. This is no trivial feat and a bastion host getting owned allows you to bypass most meaningful security checks, you can just walk into the database through the backdoor.
+
+The second benefit is a bit less obvious: You can have a AWS VPC with a subnet that is completely cut off from the world through deny-all ACLs and you can still connect to EC2 machines through EC2 instance connect endpoints as long as the security groups allow for it!
+
+That is an important distinction: A bastion host is a regular host that tunnel all traffic into a network, where it propagates through the regular routes. There is nothing special about a bastion host. If you put deny-all network ACLs in place, a bastion host is cut off, just like any other host. EC2 instance connect endpoints, however, do not route their traffic through the internet and the routing tables set in your VPC! Instead, they route their traffic through the AWS control plane and drop it straight into the ENI of the EC2 machine! 
+
+This is amazing for forensic purposes if you believe that a network was compromised!
+
