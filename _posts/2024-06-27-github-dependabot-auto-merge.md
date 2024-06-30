@@ -1,6 +1,6 @@
 ---
 layout: post
-Title: Evergreen Dependencies With Dependabot and GitHub Actions
+title: Evergreen Dependencies With Dependabot and GitHub Actions
 authors:
   - name: Felix Hammerl
     link: https://twitter.com/felixhammerl
