@@ -23,7 +23,7 @@
       height: $item-size;
       margin: -($item-size / 2);
 
-      $angle: 120 / $item-count;
+      $angle: 150 / $item-count;
       $rot: -30;
 
       @for $i from 1 through $item-count {
