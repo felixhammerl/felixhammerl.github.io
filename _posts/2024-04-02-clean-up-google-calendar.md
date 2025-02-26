@@ -19,21 +19,24 @@ function autoDeclineAndDeleteEvents() {
   var startDate = new Date()
   startDate.setDate(startDate.getDate() - 7);
   var endDate = new Date();
-  endDate.setDate(endDate.getDate() + 365);
+  endDate.setDate(endDate.getDate() + 30);
 
   var events = calendar.getEvents(startDate, endDate);
   
   for (var i = 0; i < events.length; i++) {
     var event = events[i];
     var title = event.getTitle().toLowerCase();
-    if (
-      title.includes('foo') || 
-      title.includes('bar') || 
-      title.includes('bla')
-    ) {
-      event.setMyStatus(CalendarApp.GuestStatus.NO);
-      event.deleteEvent();
-    }
+    var ignoredInvites = [
+      'blibla',
+      'foo',
+      'bar'
+    ];
+    ignoredInvites.forEach(invite => {
+      if (title.includes(invite.toLowerCase())) {
+        event.setMyStatus(CalendarApp.GuestStatus.NO);
+        event.deleteEvent();
+      }
+    })
   }
 }
 ```
@@ -63,14 +66,17 @@ In my case, I would like to remove everything that came in from the last 7 days,
 We'd like to lowercase the title to avoid missing cleaning up certain invites because we didn't get the capitalization quite right.
 
 ```
-if (
-  title.includes('foo') || 
-  title.includes('bar') || 
-  title.includes('bla')
-) {
-  event.setMyStatus(CalendarApp.GuestStatus.NO);
-  event.deleteEvent();
-}
+var ignoredInvites = [
+  'blibla',
+  'foo',
+  'bar'
+];
+ignoredInvites.forEach(invite => {
+  if (title.includes(invite.toLowerCase())) {
+    event.setMyStatus(CalendarApp.GuestStatus.NO);
+    event.deleteEvent();
+  }
+})
 ```
 
 Here's the heavy lifting: If the invite meets our criteria, in this case identified by their title "foo", "bar", and "bla", we'd like to decline the invite and remove the event from the calendar. Edit this part to match whatever you would like to decline.
