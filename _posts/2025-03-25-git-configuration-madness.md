@@ -11,11 +11,13 @@ excerpt: In this post, I will show you how to configure git to use different nam
 
 Throughtout my career, I've often stumbled across the following problem:
 
-* I use Github for my private projects, using my personal email address, signing commits with my personal PGP key. 
-* My company uses Github for my company projects, where I author commits with my work email address and sign them with a work PGP key. 
+* I use Github for my private projects, using my personal email address, signing commits with my private SSH key. 
+* My company uses Github for my company projects, where I author commits with my company email address and sign them with my company SSH key. 
 * My clients use Github and Gitlab for client projects, where I author commits with my client email address and sign them with my client SSH key. 
 * My private SSH keys are not authorized for the client Github repositories. 
-* My private and work PGP keys for signing and SSH Keys for authentication are on my Yubikeys. The client SSH keys for signing and authentication are in a client-specific 1Password vault. While the keys being provided by different means (1PW, PGP, SSH) is not important, it's just a further complication.
+* All my SSH keys are on my Yubikey, and I don't want to switch keys all the time.
+
+## Default configuration
 
 Most folks only ever use a single top-level `~/.gitconfig`. However, git allows you to define multiple configuration files and load them conditionally based on the path of the repository you are working in. 
 
@@ -24,120 +26,170 @@ To get started, I created a default configuration file in `~/.gitconfig`:
 ```
 [user]
     name = Felix Hammerl
-    email = <my work email>
-    signingkey = 7859E6520888D02E
+    email = <company email>
+    signingkey = ~/.ssh/id_ed25519_sk_work
+
+[gpg]
+    format = ssh
+
+[commit]
+    gpgsign = true
+
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+
 [color]
     ui = true
     branch = auto
     diff = auto
     interactive = auto
     status = auto
+
 [core]
     editor = vim
+
 [push]
     default = simple
-    autoSetupRemote = true
+      autoSetupRemote = true
+
 [pull]
     rebase = true
+
 [help]
     autocorrect = 0
-[commit]
-    gpgsign = true
+
 [init]
-	defaultBranch = main
+    defaultBranch = main
 ```
 
-Given that this is my work machine, by default I am using my work identity for all commits. However, I also have a personal configuration file at `~/.gitconfig.private`:
+Given that this is my company's machine, by default I am using my company identity. 
 
-```
-[user]
-    name = Felix Hammerl
-    email = felix.hammerl@gmail.com
-    signingkey = 7859E6520888D02E
-```
+## My Machine's Folder Structure
 
-The keen reader will have noticed that I am using the same GPG key for work and private, and you are correct. But that's just coincidence. You can use different keys if you want to.
+In order to use different identities and keys, you need to:
 
-This I have a configuration for a client where I sign my commits with , at `~/.gitconfig.<client>`:
-
-```
-[user]
-    name = <client idenity>
-    email = <client email>
-    signingkey = <client ssh key>
-
-[gpg]
-    format = ssh
-
-[gpg "ssh"]
-    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-
-[commit]
-    gpgsign = true
-```
-
-So now let's conditionally load this configuration:
-
-* Create additional configuration files for each client or project you are working on.
 * Split your projects into directories that match the client or project you are working on.
-* Create empty git repositories in each of these directories. These are never actually used, but they allow you to load the correct configuration file.
-* Add the `includeIf` lines to your `~/.gitconfig` file, matching the paths of the client directories containing the empty repositories. 
-* Within the client directories we created per client, clone the actual repositories you are working on as you normally would.
+* Initialize empty git repositories in each of these directories. These are never actually used, but they allow you to load the correct configuration file.
+* Create additional git configuration files for each client or project you are working on.
 
-So the directory structure looks like this:
 ```
 ~/Projects/
     private/
         .git/ <- initialized, but unused
+        .gitconfig.private <- personal configuration
         project-a/
             .git/
         project-b/
             .git/
-    <work>/
+    <company>/
         .git/ <- initialized, but unused
+        .gitconfig.<company> <- company-specific configuration
         project-c/
             .git/
         project-d/
             .git/
     <client>/
         .git/ <- initialized, but unused
+        .gitconfig.<client> <- client-specific configuration
         project-e/
             .git/
         project-f/
             .git/
 ```
 
-Let's add the following parts to the `~/.gitconfig` file:
+Please note that the angled brackets `<...>` are placeholders for the actual names, which I will not disclose here for obvious reasons.
+
+## Handling multiple .gitconfig Files
+
+The `private` directory is for my personal projects, the `company` directory is for my company projects, and the `client` directory is for my client projects. Notice that each category has its own `.gitconfig` file. 
+
+Here is a configuration for my personal projects, at `~/.gitconfig.private`:
+
+```
+[user]
+    name = Felix Hammerl
+    email = felix.hammerl@gmail.com
+    signingkey = ~/.ssh/id_ed25519_sk_private
+
+[url "git@github-private:"]
+    insteadOf = git@github.com:
+```
+
+This I have a configuration for a client where I sign my commits with , at `~/.gitconfig.<client>`:
+
+```
+[user]
+    name = <client identity>
+    email = <client email>
+    signingkey = ~/.ssh/id_ed25519_sk_<company>
+
+[url "git@github-<client>:<client-gh-org>/"]
+    insteadOf = git@github.com:<client-gh-org>/
+
+[url "git@github-<client>:<client-gh-org>/"]
+    insteadOf = https://github.com/<client-gh-org>/
+```
+
+What I am doing here is instruct git which SSH key to use for signing and I am rewriting the host names so that I can use different SSH keys for the same Github host.
+
+So now let's conditionally load these configurations:
+
+* Add the `includeIf` lines to your `~/.gitconfig` file, matching the paths of the directories containing the empty repositories. 
+* Specify the path to the corresponding configuration file for each directory.
+* Within the client directories we created per client, clone the actual repositories you are working on as you normally would.
+
+Here is how this looks at the end of my `~/.gitconfig` file:
 
 ```
 [includeIf "gitdir:~/Projects/private/"]
-    path = ~/.gitconfig.private
+    path = ~/Projects/private/.gitconfig.private
+
 [includeIf "gitdir:~/Projects/<client>/"]
-    path = ~/.gitconfig.<client>
+    path = ~/Projects/<client>/.gitconfig.<client>
 ```
 
-Please note that the angled brackets `<...>` are placeholders for the actual names, which I will not disclose here for obvious reasons. Also, please do not forget the trailing slash in the path!
+Also, please do not forget the trailing slash in the path!
+
+## SSH Configuration
 
 Here is where it gets interesting. How do you differentiate which SSH key to use for the same host (Github), where some keys have access to the client Github Enterprise, while others do not?
 
 ```
-Host github.com
-    IdentityFile ~/.ssh/<yubikey 1>
-    IdentityFile ~/.ssh/<yubikey 2>
-    IdentityFile ~/.ssh/<yubikey 3>
+Host github-private
+    HostName github.com
+    IdentityFile ~/.ssh/id_ed25519_sk_private
     IdentitiesOnly yes
     IdentityAgent none
 
-Host <client gitlab>
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
-Host githubclient
+Host github-<client>
     HostName github.com
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    IdentityFile ~/.ssh/id_ed25519_sk_<client>
+    IdentitiesOnly yes
+    IdentityAgent none
+
+Host *
+    IdentityFile ~/.ssh/id_ed25519_sk_<company>
+    IdentitiesOnly yes
+    IdentityAgent none
+
 ```
 
-When I `git clone` a repositoy from the client, I just have to replace the hostname `github.com` with `githubclient`, and the SSH agent will automatically use the 1Password agent with the proper key to authenticate me instead of my Yubikey-bound keys.
+When I `git clone` a repositoy from the client, `git clone/pull/push/...` git rewrites replaces the hostname `github.com` with `github-<client>` as instructed in the client-specific .gitconfig file, and uses the corresponding SSH key.
 
-This way, you can use different SSH keys for different clients, on the same or different hosts. Please note that this is in no way bound to using 1Password. You can use any SSH agent you like, or even no agent at all, with any key you like.
+In case you wonder why I am using `IdentitiesOnly yes` and `IdentityAgent none`: I am using a Yubikey to store my SSH keys, so if you don't set `IdentityAgent none`, you will not get the prompt `Confirm user presence for key` when pushing, which can be annoying. I am not sure where this bug originates from, but it is a known issue. Also, you will not ever need the SSH Agent when using Github.
 
-Et voilà! You can now work on different projects with different identities, without having to worry about accidentally using the wrong identity for a commit. 
+## Multiple SSH Keys on a Yubikey
+
+Now some of you might ask: "But my Yubikey can only store a single SSH resident key, how do you manage to use multiple keys?"
+
+The solution is to use different scopes for the keys, like so:
+
+* To create my personal key: `ssh-keygen -t ed25519-sk -O resident -O application=ssh:private -C "felix.hammerl@gmail.com" -f ~/.ssh/id_ed25519_sk_private`
+* To create my company key: `ssh-keygen -t ed25519-sk -O resident -O application=ssh:<company> -C "<company email>" -f ~/.ssh/id_ed25519_sk_<company>`
+* To create my client key: `ssh-keygen -t ed25519-sk -O resident -O application=ssh:<client> -C "<client email>" -f ~/.ssh/id_ed25519_sk_<client>`
+
+This way, the Yubikey will hold the SSH keys without conflict and SSH discovers them correctly.
+
+## Conclusion
+
+Et voilà! You can now work on different projects with different identities, without having to worry about accidentally using the wrong identity or the wrong key to push a commit. 
