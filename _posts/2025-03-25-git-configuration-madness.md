@@ -219,12 +219,18 @@ If you want to verify a commit signed with *another person's* key, you need to a
 
 ## Gotchas
 
+### Homebrew is now broken
+
 ```
 [url "git@github.com:"]
     insteadOf = https://github.com/
 ```
 
 If you think of putting a global `https` to `ssh` rewriting rule into your global `.gitconfig`, you will break Homebrew. Rather do it on a per-folder basis as I showed above.
+
+### Yubikey presence prompt during commit not showing
+
+When signing commits, you would expect to be prompted for the presence of the Yubikey via `Confirm user presence for key`. However, for reasons I do not understand this does not work when sining commits. I supposed this is due to the way I configured `gpg` and `gpg-agent`. It does work when pushing, though. Just remember to poke your key when prompted.
 
 ## Conclusion
 
