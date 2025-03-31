@@ -32,6 +32,9 @@ To get started, I created a default configuration file in `~/.gitconfig`:
 [gpg]
     format = ssh
 
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
+
 [commit]
     gpgsign = true
 
@@ -186,6 +189,33 @@ The solution is to use different scopes for the keys, like so:
 * To create my client key: `ssh-keygen -t ed25519-sk -O resident -O application=ssh:<client> -C "<client email>" -f ~/.ssh/id_ed25519_sk_<client>`
 
 This way, the Yubikey will hold the SSH keys without conflict and SSH discovers them correctly.
+
+## Verifying Signed Commits
+
+In order to verify signed signed commits with the correct key, you need to tell git which keys are allowed to sign commits. This is done in the `~/.ssh/allowed_signers` file:
+
+```
+echo "felix.hammerl@gmail.com namespaces=\"git\" $(cat ~/.ssh/id_ed25519_sk_private.pub)" >> ~/.ssh/allowed_signers
+echo "<client email> namespaces=\"git\" $(cat ~/.ssh/id_ed25519_sk_<client>.pub)" >> ~/.ssh/allowed_signers
+echo "<work email> namespaces=\"git\" $(cat ~/.ssh/id_ed25519_sk_<company>.pub)" >> ~/.ssh/allowed_signers
+```
+
+In order to verify that the correct key is used for signing, you can use the following command:
+
+```bash
+git verify-commit HEAD
+```
+
+What it should show is the correct key being used for signing:
+
+```bash
+➜  felixhammerl.github.io git:(master) ✗ git verify-commit HEAD
+Good "git" signature for felix.hammerl@gmail.com with ED25519-SK key SHA256:<...>
+```
+
+If this fails, you probably missed setting up the `~/.ssh/allowed_signers` file correctly.
+
+If you want to verify a commit signed with *another person's* key, you need to add their public key to the `~/.ssh/allowed_signers` file.
 
 ## Gotchas
 
