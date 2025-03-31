@@ -35,9 +35,6 @@ To get started, I created a default configuration file in `~/.gitconfig`:
 [commit]
     gpgsign = true
 
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-
 [color]
     ui = true
     branch = auto
@@ -123,11 +120,11 @@ This I have a configuration for a client where I sign my commits with , at `~/.g
     email = <client email>
     signingkey = ~/.ssh/id_ed25519_sk_<company>
 
-[url "git@github-<client>:<client-gh-org>/"]
-    insteadOf = git@github.com:<client-gh-org>/
+[url "git@github-<client>:"]
+    insteadOf = git@github.com:/
 
-[url "git@github-<client>:<client-gh-org>/"]
-    insteadOf = https://github.com/<client-gh-org>/
+[url "git@github-<client>:"]
+    insteadOf = https://github.com/
 ```
 
 What I am doing here is instruct git which SSH key to use for signing and I am rewriting the host names so that I can use different SSH keys for the same Github host.
@@ -190,6 +187,16 @@ The solution is to use different scopes for the keys, like so:
 
 This way, the Yubikey will hold the SSH keys without conflict and SSH discovers them correctly.
 
+## Gotchas
+
+```
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+```
+
+If you think of putting a global `https` to `ssh` rewriting rule into your global `.gitconfig`, you will break Homebrew. Rather do it on a per-folder basis as I showed above.
+
 ## Conclusion
 
 Et voilà! You can now work on different projects with different identities, without having to worry about accidentally using the wrong identity or the wrong key to push a commit. 
+
